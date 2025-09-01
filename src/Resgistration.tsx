@@ -1,18 +1,30 @@
+import { useRef } from "react";
+import { Textarea } from "@/components/ui/textarea";
+
 export default function Resgistration() {
-  const submitHandler = (e: React.FormEvent) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
 
-    alert("!!");
+    if (textareaRef.current instanceof HTMLTextAreaElement) {
+      const teamStr = textareaRef.current?.value;
+
+      if (teamStr.includes(",")) {
+        teamStr
+          .trim()
+          .split(",")
+          .forEach((teamName) => {
+            console.log(teamName);
+          });
+      }
+    }
   };
 
   return (
-    <form
-      className="flex flex-col align-middle w-full"
-      action={"#"}
-      onSubmit={submitHandler}
-    >
-      <input name="team_name" type="text" placeholder="팀 명을 입력하세요.." />
-      <button> 등록하기! </button>
-    </form>
+    <>
+      <Textarea ref={textareaRef} placeholder="팀 명을 입력해주세요" />
+      <button onClick={submitHandler}> 등록하기! </button>
+    </>
   );
 }

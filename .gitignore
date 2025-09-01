@@ -23,16 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Yarn Berry
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-
-# 캐시/빌드 상태 파일은 무시
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
+.vscode
+package-lock.json
+pnpm-lock.yaml
