@@ -3,19 +3,20 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import Router from "./Router";
 import AppHeader from "./AppHeader";
+import { Outlet } from "react-router";
 
 function App() {
   return (
     <ResizablePanelGroup direction="vertical">
-      <ResizablePanel>
+      <ResizablePanel defaultSize={10}>
         <AppHeader />
       </ResizablePanel>
       <ResizableHandle />
-      <ResizablePanel>
-        <Router />
+      <ResizablePanel defaultSize={80} className="flex flex-row justify-center">
+        <Outlet />
       </ResizablePanel>
+      <ResizablePanel defaultSize={10}></ResizablePanel>
     </ResizablePanelGroup>
   );
 }
