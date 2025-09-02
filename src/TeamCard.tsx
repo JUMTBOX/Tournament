@@ -16,7 +16,7 @@ export type Team = {
 
 export default function TeamCard({ team }: { team?: Team | null }) {
   return (
-    <Card>
+    <Card className="w-1/2">
       <CardHeader>
         <CardTitle> {team?.name ?? "DEFAULT TEAM NAME"} </CardTitle>
         <Avatar className="rounded-lg">
