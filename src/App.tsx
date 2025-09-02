@@ -1,12 +1,22 @@
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 import Router from "./Router";
-import "./App.css";
+import AppHeader from "./AppHeader";
 
 function App() {
   return (
-    <>
-      <header></header>
-      <Router />
-    </>
+    <ResizablePanelGroup direction="vertical">
+      <ResizablePanel>
+        <AppHeader />
+      </ResizablePanel>
+      <ResizableHandle />
+      <ResizablePanel>
+        <Router />
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 }
 
