@@ -6,7 +6,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import Autoplay from "embla-carousel-autoplay";
 
-export default function Content() {
+export default function MainCarousel() {
   return (
     <div className="grid grid-rows-2 items-center w-full h-full" id="container">
       <Carousel
@@ -21,7 +21,7 @@ export default function Content() {
         <CarouselContent className="w-full h-full">
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem key={index} className="w-full h-full basis-1/4">
-              <Card className="w-full h-full bg-blue-500">
+              <Card className="w-full h-full bg-white">
                 <CardContent className="flex aspect-square items-center justify-center p-6">
                   <span className="text-4xl font-semibold">{index + 1}</span>
                 </CardContent>

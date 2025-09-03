@@ -4,9 +4,12 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import AppHeader from "./AppHeader";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
+import MainCarousel from "./MainCarousel";
 
 function App() {
+  const location = useLocation();
+
   return (
     <ResizablePanelGroup direction="vertical">
       <ResizablePanel defaultSize={10}>
@@ -14,7 +17,7 @@ function App() {
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel defaultSize={80} className="flex flex-row justify-center">
-        <Outlet />
+        {location.pathname === "/" ? <MainCarousel /> : <Outlet />}
       </ResizablePanel>
       <ResizablePanel defaultSize={10}></ResizablePanel>
     </ResizablePanelGroup>
