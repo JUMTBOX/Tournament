@@ -1,9 +1,11 @@
+import { useMemo } from "react";
 import { useParams } from "react-router";
-import TeamCard, { type Team } from "./TeamCard";
-import { Card } from "@/components/ui/card";
+import { type Team } from "@/TeamCard";
+import { totalRounds } from "@/bracketUtil";
+import MatchCard from "./MatchCard";
 
 export type Match = {
-  id: string;
+  id?: string;
   teamA?: Team | null;
   teamB?: Team | null;
 };
@@ -19,38 +21,27 @@ export default function Bracket() {
     { id: "t4", name: "Delta" },
     { id: "t5", name: "Echo" },
     { id: "t6", name: "Foxtrot" },
+    { id: "t7", name: "temp7" },
+    { id: "t8", name: "temp8" },
   ];
 
-  const firstRound: Match[] = [];
-  for (let i = 0; i < teams.length; i += 2) {
-    firstRound.push({
-      id: `R1M${i / 2}`,
-      teamA: teams[i] ?? null,
-      teamB: teams[i + 1] ?? null,
-    });
-  }
-
-  const rounds: Match[][] = [firstRound];
-
-  let size = firstRound.length;
-
-  while (size > 1) {
-    const next: Match[] = Array.from(
-      { length: Math.ceil(size / 2) },
-      (_, i) => ({ id: `R${rounds.length + 1}M${i}`, teamA: null, teamB: null })
-    );
-    rounds.push(next);
-    size = next.length;
-  }
+  const rounds = useMemo(() => totalRounds(teams), [teams.length]);
 
   return (
-    <>
-      {rounds?.map(([{ teamA, teamB }], i) => (
-        <Card key={i} className="flex w-full justify-around">
-          <TeamCard team={teamA} key={teamA?.id} />
-          <TeamCard team={teamB} key={teamB?.id} />
-        </Card>
+    <div
+      className={`grid grid-rows-${rounds.length} w-full h-full`}
+      id="bracket_wrapper"
+    >
+      {rounds.map((round, i) => (
+        <div
+          key={i}
+          className="flex flex-row justify-center items-center w-full h-full"
+        >
+          {round.map(({ teamA, teamB }, idx) => (
+            <MatchCard teamA={teamA} teamB={teamB} />
+          ))}
+        </div>
       ))}
-    </>
+    </div>
   );
 }

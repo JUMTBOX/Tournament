@@ -189,3 +189,20 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .bracket-up {
+    position: relative;
+  }
+  .bracket-up::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: calc(-1 * var(--up, 48px));
+    transform: translateX(-50%);
+    width: var(--stroke, 2px);
+    height: var(--up, 48px);
+    background: var(--line, #d4d4d8);
+    border-radius: 9999px;
+  }
+}

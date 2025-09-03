@@ -5,6 +5,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+  DialogHeader,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export type Team = {
@@ -16,16 +24,31 @@ export type Team = {
 
 export default function TeamCard({ team }: { team?: Team | null }) {
   return (
-    <Card className="w-1/2">
-      <CardHeader>
-        <CardTitle> {team?.name ?? "DEFAULT TEAM NAME"} </CardTitle>
-        <Avatar className="rounded-lg">
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        <CardDescription>{"DEFAULT DESCRIPTION"}</CardDescription>
-      </CardHeader>
-      <CardContent>{team?.seed ?? "DEFAULT CONTENT"}</CardContent>
-    </Card>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Card className="w-1/2">
+          <CardHeader>
+            <CardTitle> {team?.name ?? "DEFAULT TEAM NAME"} </CardTitle>
+            <Avatar className="rounded-lg">
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <CardDescription>{"DEFAULT DESCRIPTION"}</CardDescription>
+          </CardHeader>
+          <CardContent>{team?.seed ?? "DEFAULT CONTENT"}</CardContent>
+        </Card>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <Avatar className="rounded-lg">
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <DialogTitle>{team?.name ?? "DEFAULT TEAM NAME"}</DialogTitle>
+        </DialogHeader>
+        <div>description...</div>
+        <DialogFooter></DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
