@@ -22,8 +22,6 @@ export default function Bracket() {
     queryFn: getAllTeam,
   });
 
-  console.log(teams);
-
   const rounds = useMemo(() => totalRounds(teams ?? []), [teams?.length]);
 
   return (
