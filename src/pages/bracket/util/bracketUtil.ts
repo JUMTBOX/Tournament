@@ -35,7 +35,7 @@ export const totalRounds = (teams: Team[]) => {
   let { length: teamLen } = teams;
 
   while (teamLen > 1) {
-    const roundMatch = Array(Math.floor(teamLen / 2)).fill({
+    const roundMatch = Array(Math.ceil(teamLen / 2)).fill({
       id: "",
       teamA: null,
       teamB: null,
