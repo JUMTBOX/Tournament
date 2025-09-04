@@ -1,5 +1,5 @@
-import type { Match } from "./Bracket";
-import type { Team } from "./TeamCard";
+import type { Match } from "@/pages/bracket/Bracket";
+import type { Team } from "@/pages/bracket/TeamCard";
 
 /** 나중에 팀 업로드 할 때나 아니면 다른 시점으로 옮기기... */
 const randomMatching = (teams: Team[]) => {
@@ -29,13 +29,13 @@ const randomMatching = (teams: Team[]) => {
  */
 export const totalRounds = (teams: Team[]) => {
   if (teams.length % 2 !== 0)
-    teams.push({ id: "부전승", name: "부전승", logoUrl: "" });
+    teams.push({ id: 999999, teamName: "부전승", logoUrl: "" });
 
   const rounds: Match[][] = [];
   let { length: teamLen } = teams;
 
   while (teamLen > 1) {
-    const roundMatch = Array(teamLen / 2).fill({
+    const roundMatch = Array(Math.floor(teamLen / 2)).fill({
       id: "",
       teamA: null,
       teamB: null,

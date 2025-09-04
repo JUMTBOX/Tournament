@@ -1,10 +1,12 @@
 import { useRef } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "./components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { RegistrationRequestUtil } from "@/pages/registration/requestUtil";
 
 export default function Resgistration() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { createMulti, create } = RegistrationRequestUtil;
 
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -13,13 +15,16 @@ export default function Resgistration() {
       const teamStr = textareaRef.current?.value;
 
       if (teamStr.includes(",")) {
-        teamStr
-          .trim()
-          .split(",")
-          .forEach((teamName) => {
-            console.log(teamName);
-          });
+        createMulti(
+          teamStr
+            .split(",")
+            .filter((tn) => tn.match(/\S/))
+            .map((tn) => ({ teamName: tn.trim() }))
+        );
+      } else {
+        create({ teamName: teamStr.trim() });
       }
+      textareaRef.current.value = "";
     }
   };
 

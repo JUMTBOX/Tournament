@@ -7,11 +7,12 @@ import {
   createBrowserRouter,
 } from "react-router";
 import { TournamentRoutes } from "@/routes/TournamentRoutes";
-import App from "./App.tsx";
-import Resgistration from "@/Resgistration.tsx";
+import App from "./pages/main/App.tsx";
+import Resgistration from "@/pages/registration/Resgistration.tsx";
 import "./index.css";
 
 const queryClient = new QueryClient();
+
 const routes: RouteObject[] = [
   {
     path: "/",

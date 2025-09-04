@@ -1,8 +1,10 @@
 import { useMemo } from "react";
 import { useParams } from "react-router";
-import { type Team } from "@/TeamCard";
-import { totalRounds } from "@/bracketUtil";
-import MatchCard from "./MatchCard";
+import { useQuery } from "@tanstack/react-query";
+import { type Team } from "@/pages/bracket/TeamCard";
+import { totalRounds } from "@/pages/bracket/util/bracketUtil";
+import MatchCard from "@/pages/bracket/MatchCard";
+import { BracketRequestUtil } from "@/pages/bracket/util/requestUtil";
 
 export type Match = {
   id?: string;
@@ -12,20 +14,17 @@ export type Match = {
 
 export default function Bracket() {
   const params = useParams();
+  const { getAllTeam } = BracketRequestUtil;
   console.log("파라메타 >>> ", params);
 
-  const teams: Team[] = [
-    { id: "t1", name: "Alpha" },
-    { id: "t2", name: "Bravo" },
-    { id: "t3", name: "Charlie" },
-    { id: "t4", name: "Delta" },
-    { id: "t5", name: "Echo" },
-    { id: "t6", name: "Foxtrot" },
-    { id: "t7", name: "temp7" },
-    { id: "t8", name: "temp8" },
-  ];
+  const { data: teams } = useQuery({
+    queryKey: ["all_team"],
+    queryFn: getAllTeam,
+  });
 
-  const rounds = useMemo(() => totalRounds(teams), [teams.length]);
+  console.log(teams);
+
+  const rounds = useMemo(() => totalRounds(teams ?? []), [teams?.length]);
 
   return (
     <div
@@ -37,7 +36,7 @@ export default function Bracket() {
           key={i}
           className="flex flex-row justify-center items-center w-full h-full"
         >
-          {round.map(({ teamA, teamB }, idx) => (
+          {round.map(({ teamA, teamB }) => (
             <MatchCard teamA={teamA} teamB={teamB} />
           ))}
         </div>

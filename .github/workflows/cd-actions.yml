@@ -1,0 +1,41 @@
+name: deploy...
+on:
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: source checkout
+        uses: actions/checkout@v4
+
+      - name: set up NodeJs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: set up pnpm
+        run: npm install -g pnpm
+
+      - name: install dependencies
+        run: pnpm install
+
+      - name: build process
+        run: pnpm run build -- --mode prodution
+
+      - name: host on firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{secrets.GITHUB_TOKEN}}
+          firebaseServiceAccount: ${{secrets.FIREBASE_SERVICE_ACCOUNT_TOURNAMENT}}
+          projectId: tournament # will be modified
+          channelId: "" # will be modified
+          entryPoint: "."
+        env:
+          FIREBASE_AUTH_TOKEN: ${{secrets}} # will be modified   Firebase 인증 토큰

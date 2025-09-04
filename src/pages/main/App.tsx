@@ -3,7 +3,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import AppHeader from "./AppHeader";
+import AppHeader from "../../common/AppHeader";
 import { Outlet, useLocation } from "react-router";
 import MainCarousel from "./MainCarousel";
 

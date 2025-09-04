@@ -1,4 +1,4 @@
-import Bracket from "@/Bracket";
+import Bracket from "@/pages/bracket/Bracket";
 import type { RouteObject } from "react-router";
 
 export const TournamentRoutes: RouteObject[] = [
