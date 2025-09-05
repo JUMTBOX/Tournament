@@ -3,6 +3,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { RegistrationRequestUtil } from "@/pages/registration/requestUtil";
+import DivisionSelector from "@/common/DivisionSelector";
+import GroupSelector from "@/common/GroupSelector";
 
 export default function Resgistration() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -29,8 +31,12 @@ export default function Resgistration() {
   };
 
   return (
-    <Card className="flex flex-row justify-center items-center p-5 w-full">
-      <CardContent className="w-3/5">
+    <Card className="flex flex-col justify-center items-center p-5 w-full">
+      <div className="flex flex-row w-full mb-10 gap-10 ml-10">
+        <DivisionSelector />
+        <GroupSelector />
+      </div>
+      <CardContent className="w-4/5">
         <Textarea
           ref={textareaRef}
           placeholder="팀 명을 입력해주세요"

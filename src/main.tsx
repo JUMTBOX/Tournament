@@ -10,6 +10,7 @@ import { TournamentRoutes } from "@/routes/TournamentRoutes";
 import App from "./pages/main/App.tsx";
 import Resgistration from "@/pages/registration/Resgistration.tsx";
 import "./index.css";
+import TimeTable from "./pages/ranktable/TimeTable.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const routes: RouteObject[] = [
     element: <App />,
     children: [
       { path: "/registration", element: <Resgistration /> },
+      { path: "/temp", element: <TimeTable /> },
       ...TournamentRoutes,
     ],
   },
